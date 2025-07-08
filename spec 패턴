@@ -1,6 +1,6 @@
 data class Subscription(
     val userId: Long,
-    val status: Status,
+    val status: Status, 
     val expiresAt: LocalDateTime
 ) {
     enum class Status {
