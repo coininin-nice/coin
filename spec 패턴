@@ -48,10 +48,46 @@ class IsExpiringSoonSpec(
 
 
 
+val activeSpec = IsActiveSpec()
+val expiringSoonSpec = IsExpiringSoonSpec(LocalDateTime.now())
+
+val canExtendSpec = activeSpec.and(expiringSoonSpec)
 
 
+val subscription = Subscription(
+    userId = 1L,
+    status = Subscription.Status.ACTIVE,
+    expiresAt = LocalDateTime.now().plusDays(2)
+)
+
+val canExtend = canExtendSpec.isSatisfiedBy(subscription) // ✅ true
 
 
+class AndSpecification<T>(
+    private val spec1: Specification<T>,
+    private val spec2: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return spec1.isSatisfiedBy(candidate) && spec2.isSatisfiedBy(candidate)
+    }
+}
+
+class OrSpecification<T>(
+    private val spec1: Specification<T>,
+    private val spec2: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return spec1.isSatisfiedBy(candidate) || spec2.isSatisfiedBy(candidate)
+    }
+}
+
+class NotSpecification<T>(
+    private val spec: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return !spec.isSatisfiedBy(candidate)
+    }
+}
 
 
 
