@@ -1,0 +1,51 @@
+class AndSpecification<T>(
+    private val spec1: Specification<T>,
+    private val spec2: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return spec1.isSatisfiedBy(candidate) && spec2.isSatisfiedBy(candidate)
+    }
+}
+
+class OrSpecification<T>(
+    private val spec1: Specification<T>,
+    private val spec2: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return spec1.isSatisfiedBy(candidate) || spec2.isSatisfiedBy(candidate)
+    }
+}
+
+class NotSpecification<T>(
+    private val spec: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return !spec.isSatisfiedBy(candidate)
+    }
+}
+
+class AndSpecification<T>(
+    private val spec1: Specification<T>,
+    private val spec2: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return spec1.isSatisfiedBy(candidate) && spec2.isSatisfiedBy(candidate)
+    }
+}
+
+class OrSpecification<T>(
+    private val spec1: Specification<T>,
+    private val spec2: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return spec1.isSatisfiedBy(candidate) || spec2.isSatisfiedBy(candidate)
+    }
+}
+
+class NotSpecification<T>(
+    private val spec: Specification<T>
+) : Specification<T> {
+    override fun isSatisfiedBy(candidate: T): Boolean {
+        return !spec.isSatisfiedBy(candidate)
+    }
+}
