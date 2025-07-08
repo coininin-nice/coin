@@ -37,6 +37,14 @@ class IsExpiringSoonSpec(
 
 
 
+class IsExpiringSoonSpec(
+    private val now: LocalDateTime = LocalDateTime.now()
+) : Specification<Subscription> {
+    override fun isSatisfiedBy(candidate: Subscription): Boolean {
+        val remainingDays = Duration.between(now, candidate.expiresAt).toDays()
+        return remainingDays in 0..3
+    }
+}
 
 
 
